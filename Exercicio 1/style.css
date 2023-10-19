@@ -1,4 +1,8 @@
-p {
-    justify-content: center;
-    font-size: 7px;
+.h21 {
+    color: blue;
+    text-align: right;
+}
+
+.h22 {
+    text-align: left;
 }
