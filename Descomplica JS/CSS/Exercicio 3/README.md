@@ -1,0 +1,1 @@
+Crie uma pagina que tenha uma tabela com 6 imagens e suas descrições em verde centralizadas e as imagens centralizadas em um css externo.
