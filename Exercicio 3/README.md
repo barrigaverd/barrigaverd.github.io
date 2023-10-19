@@ -1,0 +1,1 @@
+Elabore um Html com uma tabela 2 colunas e 3 linhas com imagens de eletro domésticos com a fonte cor verde e alinhado ao centro, 6px.

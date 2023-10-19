@@ -1,1 +1,1 @@
-# barrigaverd.github.io
+Crie uma página HTML com seu critério, titulo H1, dois subtitulos H2, o primeiro com cor azul e alinhado a direita e o segundo alinhado a esquerda. 

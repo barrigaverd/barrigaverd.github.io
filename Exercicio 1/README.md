@@ -1,1 +1,1 @@
-# barrigaverd.github.io
+Crie uma página HTML com conteúdo definido a seu critério, mostrando un título formatado com a etiqueta <H2>, um paragrafo com alinhamento justificado e fonte tamanho 7.
