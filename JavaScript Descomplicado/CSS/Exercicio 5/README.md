@@ -1,0 +1,1 @@
+cire uma página com nomes de cores. Cada item deve ser formatado na cor que representa e em tamanho 28px.

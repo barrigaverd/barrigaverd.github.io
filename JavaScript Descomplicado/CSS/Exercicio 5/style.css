@@ -1,0 +1,34 @@
+.marrom {
+    color: maroon;
+}
+
+* {
+    font-size: 28px
+}
+.vermelho {
+    color: red;
+}
+
+.verde {
+    color: green;
+}
+
+.amarelo {
+    color: yellow;
+}
+
+.azul {
+    color: blue;
+}
+
+.cinza {
+    color: gray;
+}
+
+.rosa {
+    color: pink;
+}
+
+.roxo {
+    color: royalblue;
+}
