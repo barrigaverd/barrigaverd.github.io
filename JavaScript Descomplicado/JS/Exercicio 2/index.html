@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Preço de Venda</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <h1>Calculadora de Preço de Venda</h1>
+        <label for="price">Preço Unitário:</label>
+        <input type="number" id="price" step="0.01" placeholder="Insira o preço unitário">
+        
+        <label for="quantity">Quantidade Vendida:</label>
+        <input type="number" id="quantity" placeholder="Insira a quantidade vendida">
+        
+        <label for="discount">Desconto:</label>
+        <input type="number" id="discount" step="0.01" placeholder="Insira o valor do desconto">
+        
+        <button id="calculate">Calcular</button>
+        
+        <div id="result">
+            <h2>Preço de Venda:</h2>
+            <p id="finalPrice">0.00</p>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>
