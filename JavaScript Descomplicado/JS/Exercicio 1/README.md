@@ -1,0 +1,1 @@
+Crie uma página que receba quatro numeros reais digitados pelo usuário. Calcule e exiba o valor da média desses numeros.
