@@ -14,24 +14,24 @@ class Neuron{
         this.weightList = new Array(inputs)
         .fill()
         .map(() => randomRange(-1, 1))
-    }
-};
+    };
 
-g(signalList = []) {
-    let u = 0;
+    g(signalList = []) {
+        let u = 0;
 
-    for(let i = 0; i < this.weightList.lenght; i++){
-        u += signalList[i] * this.weightList[i]
-    }
+        for(let i = 0; i < this.weightList.lenght; i++){
+            u += signalList[i] * this.weightList[i];
+        };
 
-    if(Math.tanh(u) > this.bias) return 1; // Ativado
-    else return 0; // Desativado
-};
+        if(Math.tanh(u) > this.bias) return 1; // Ativado
+        else return 0; // Desativado
+    };
 
-mutate(rate = 1){
-    this.weightList = this.weightList.map(() => {
-        return lerp(w, randomRange(-1, 1), rate)
-    });
+    mutate(rate = 1){
+        this.weightList = this.weightList.map((w) => {
+            return lerp(w, randomRange(-1, 1), rate);
+        });
 
-    this.bias = lerp(this.bias, randomRange(-1, 1), range)
+        this.bias = lerp(this.bias, randomRange(-1, 1), rate);
+    };
 };
