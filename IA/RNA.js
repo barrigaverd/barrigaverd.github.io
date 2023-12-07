@@ -80,12 +80,12 @@ class RNA {
             });
         } catch (e){
             return;
-        }
-    }
+        };
+    };
 
     save() {
         return this.levelList;
-    }
+    };
 
 };
 
