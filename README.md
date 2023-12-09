@@ -1,1 +1,1 @@
-# Exercícios do livro Java Script Descomplicado
+# Meu códigos particulares. Em constante aprendizado.
