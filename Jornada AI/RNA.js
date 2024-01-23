@@ -40,7 +40,7 @@ function randomRange(min, max) {
     }
   
     // Função que realiza mutação nos pesos e no viés do neurônio
-    mutate(rate = 1) {
+    mutate(rate = 0.2) {
       this.weightList = this.weightList.map((w) => {
         // Faz uma mudança nos pesos com base na taxa 'rate'
         return lerp(w, randomRange(-1, 1), rate);

@@ -2,51 +2,51 @@ import utils from './utils.js';
 import RNA from './RNA.js';
 import controls from './controls.js';
 
-const SAMPLES = 10; // Número de amostras (agentes) no algoritmo genético
-const game = Runner.instance_; // Instância do jogo "Runner"
-let dinoList = []; // Lista de dinossauros
-let dinoIndex = 0; // Índice do dinossauro atual na lista
+const SAMPLES = 10;
+const game = Runner.instance_;
+let dinoList = [];
+let dinoIndex = 0;
+let bestScore = 0;
+let bestRNA = null;
 
-let bestScore = 0; // Melhor pontuação encontrada durante o treinamento
-let bestRNA = null; // Melhor RNA (rede neural) encontrada durante o treinamento
-
-function fillDinoList () {
-  for (let i=0; i<SAMPLES; i++) {
-    dinoList[i] = new RNA(3, [10, 10, 2]); // Cria um novo dinossauro com uma RNA de 3 camadas
-    dinoList[i].load(bestRNA); // Carrega a melhor RNA encontrada anteriormente
-    if (i > 0) dinoList[i].mutate(0.2); // Mutação na RNA dos dinossauros, exceto o primeiro
+function fillDinoList() {
+  for (let i = 0; i < SAMPLES; i++) {
+    // Alterando a estrutura da RNA para uma rede mais profunda e larga
+    dinoList[i] = new RNA(3, [16, 12, 8, 4, 2]); // Exemplo de 5 camadas
+    dinoList[i].load(bestRNA);
+    if (i > 0) dinoList[i].mutate(0.3); // Aumentando a taxa de mutação para 30%
   }
   console.log('Dino list created!');
 }
 
 setTimeout(() => {
   fillDinoList();
-  controls.dispatch('jump'); // Faz o dinossauro executar um salto no jogo
+  controls.dispatch('jump');
 }, 1000);
 
 setInterval(() => {
-  if (!game.activated) return; // Verifica se o jogo está ativado
+  if (!game.activated) return;
 
-  const dino = dinoList[dinoIndex]; // Seleciona o dinossauro atual
+  const dino = dinoList[dinoIndex];
 
-  if (game.crashed) { // Verifica se o dinossauro colidiu no jogo
+  if (game.crashed) {
     if (dino.score > bestScore) {
       bestScore = dino.score;
-      bestRNA = dino.save(); // Salva a RNA do dinossauro com a melhor pontuação
+      bestRNA = dino.save();
       console.log('bestScore:', bestScore);
     }
     dinoIndex++;
 
-    if (dinoIndex === SAMPLES) { // Se todos os dinossauros foram avaliados, preenche a lista novamente
+    if (dinoIndex === SAMPLES) {
       fillDinoList();
       dinoIndex = 0;
       bestScore = 0;
     }
-    game.restart(); // Reinicia o jogo
+    game.restart();
   }
 
   const { tRex, horizon, currentSpeed, distanceRan, dimensions } = game;
-  dino.score = distanceRan - 2000; // Calcula a pontuação do dinossauro
+  dino.score = distanceRan - 2000;
 
   const player = {
     x: tRex.xPos,
@@ -59,28 +59,27 @@ setInterval(() => {
       return {
         x: obstacle.xPos,
         y: obstacle.yPos,
-      }
+      };
     })
-    .filter((obstacle) => obstacle.x > player.x)
+    .filter((obstacle) => obstacle.x > player.x);
 
-  if (obstacle) { // Verifica se há um obstáculo presente
-    const distance = 1 - (utils.getDistance(player, obstacle) / dimensions.WIDTH); // Calcula a distância relativa entre o jogador e o obstáculo
-    const speed = player.speed / 6; // Calcula a velocidade relativa do jogador
-    const height = Math.tanh(105 - obstacle.y); // Calcula a altura relativa do obstáculo
+  if (obstacle) {
+    const distance = 1 - (utils.getDistance(player, obstacle) / dimensions.WIDTH);
+    const speed = player.speed / 6;
+    const height = Math.tanh(105 - obstacle.y);
 
-    // Processa as informações no dinossauro atual
-    const [jump, crounch] = dino.compute([
+    const [jump, crouch] = dino.compute([
       distance,
       speed,
       height,
     ]);
 
-    // Executa as ações com base nas probabilidades calculadas
-    if (jump === crounch) return; // Se a probabilidade de salto e agachamento forem iguais, nenhuma ação é tomada
-    if (jump) controls.dispatch('jump'); // Se a probabilidade de salto for verdadeira, o dinossauro executa um salto
-    if (crounch) controls.dispatch('crounch'); // Se a probabilidade de agachamento for verdadeira, o dinossauro se agacha
+    if (jump === crouch) return;
+    if (jump) controls.dispatch('jump');
+    if (crouch) controls.dispatch('crouch');
   }
 }, 100);
+
 
 /* const s = document.createElement('script');
 s.type = 'module';
